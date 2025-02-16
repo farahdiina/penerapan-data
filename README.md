@@ -1,4 +1,4 @@
-# Proyek Akhir: Menyelesaikan Permasalahan Perusahaan Edutech
+# Proyek Akhir: Menyelesaikan Students' Performance
 
 ## Business Understanding
 Jaya Jaya Institut adalah sebuah lembaga pendidikan tinggi yang telah beroperasi sejak tahun 2000 dan telah menghasilkan lulusan berkualitas yang berkontribusi di berbagai industri. Namun, dalam beberapa tahun terakhir, mereka menghadapi tantangan serius berupa tingginya tingkat dropout mahasiswa. Fenomena ini tidak hanya berdampak pada reputasi institusi, tetapi juga mempengaruhi stabilitas keuangan dan efektivitas program akademik. Salah satu faktor utama yang menyebabkan dropout adalah kesulitan akademik, masalah finansial, serta kurangnya keterlibatan mahasiswa dalam kegiatan akademik. Jika dropout tidak segera diidentifikasi dan dicegah, institusi akan kehilangan lebih banyak mahasiswa potensial, yang pada akhirnya dapat menurunkan tingkat kelulusan dan daya saing di dunia pendidikan. Untuk mengatasi permasalahan ini, Jaya Jaya Institut berupaya menerapkan pendekatan berbasis data dengan menggunakan model machine learning untuk memprediksi mahasiswa yang berisiko tinggi mengalami dropout. Dengan sistem prediksi ini, institusi dapat memberikan intervensi lebih awal, seperti bimbingan akademik, dukungan finansial, atau konseling untuk membantu mahasiswa tetap berada di jalur pendidikan mereka. Selain itu, dashboard analisis juga akan dikembangkan agar pihak administrasi dapat dengan mudah memantau dan memahami tren performa mahasiswa serta mengambil langkah strategis untuk meningkatkan retensi mahasiswa. Proyek ini bertujuan untuk mengembangkan sistem prediksi dropout yang akurat serta dashboard interaktif yang dapat membantu pihak manajemen dalam membuat keputusan berbasis data. Dengan solusi ini, diharapkan tingkat dropout dapat ditekan, sehingga lebih banyak mahasiswa dapat menyelesaikan pendidikan mereka dengan sukses.
@@ -18,28 +18,39 @@ Jaya Jaya Institut adalah sebuah lembaga pendidikan tinggi yang telah beroperasi
    - Memahami struktur dan karakteristik data, termasuk tipe variabel, jumlah data, serta nilai yang hilang atau tidak valid.
 2. Eksplorasi Data (Exploratory Data Analysis - EDA)
    - Melakukan analisis awal untuk mengidentifikasi pola, tren, dan distribusi data.
-   - Visualisasi data menggunakan seaborn, matplotlib, dan plotly untuk memahami hubungan antar variabel serta mendeteksi anomali atau outlier.
+   - Visualisasi data menggunakan Seaborn, Matplotlib, dan Plotly untuk memahami hubungan antar variabel serta mendeteksi anomali atau outlier.
+   - Membuat berbagai plot seperti histogram, countplot, scatterplot, dan boxplot untuk mendapatkan wawasan mendalam.
 3. Pembersihan dan Persiapan Data
-   - Menangani nilai yang hilang dengan SimpleImputer menggunakan strategi yang sesuai.
+   - Menangani nilai yang hilang menggunakan SimpleImputer dengan strategi most_frequent.
    - Menghapus duplikasi data untuk memastikan keakuratan analisis.
    - Menggunakan Label Encoding untuk variabel kategorikal dan StandardScaler untuk menormalisasi data numerik.
+   - Menyimpan data yang telah diproses ke dalam file data_clean.csv dan data_processed.csv.
 4. Penanganan Ketidakseimbangan Data
-   - Menggunakan teknik SMOTETomek untuk menangani ketidakseimbangan kelas dan meningkatkan kualitas model prediksi.
-5. Seleksi Fitur
-   - Menggunakan SelectFromModel dengan RandomForestClassifier untuk memilih fitur yang paling berpengaruh terhadap prediksi.
-   - Menghapus fitur yang tidak memiliki kontribusi signifikan dalam meningkatkan akurasi model.
-6. Pengembangan Model Prediksi
-   - Membagi dataset menjadi data latih (train) dan data uji (validation) dengan train_test_split.
-   - Menggunakan teknik Pipeline dan ColumnTransformer untuk preprocessing sebelum model dijalankan.
-   - Membangun dan melatih model prediksi dengan algoritma Random Forest, Gradient Boosting, AdaBoost, SVM, dan SGDClassifier.
-   - Menggunakan VotingClassifier untuk membangun model ensemble guna meningkatkan akurasi prediksi.
-   - Menyimpan model terbaik dalam format .pkl menggunakan pickle atau joblib.
-7. Implementasi Aplikasi Prediksi
-   - Mengembangkan aplikasi berbasis Streamlit untuk mempermudah pengguna dalam melakukan prediksi.
-   - Menyediakan fitur upload dataset, visualisasi data, prediksi dropout mahasiswa, serta unduhan hasil prediksi dalam format CSV.
-8. Evaluasi dan Optimasi Model
-   - Menggunakan cross-validation untuk mengevaluasi performa model dengan metrik accuracy, precision, recall, dan F1-score.
-   - Menganalisis confusion matrix untuk memahami kesalahan prediksi.
+   - Menggunakan teknik SMOTE (Synthetic Minority Over-sampling Technique) untuk menyeimbangkan jumlah data kelas minoritas.
+   - Menggunakan Tomek Links untuk menghilangkan contoh yang terlalu mirip dan meningkatkan separasi antar kelas.
+   - Mengecek distribusi data sebelum dan sesudah balancing untuk memastikan efektivitas metode yang digunakan.
+5. Pemilihan dan Pelatihan Model
+   - Menerapkan berbagai algoritma klasifikasi:
+     - Random Forest
+     - Gradient Boosting
+     - AdaBoost
+     - SVM (Support Vector Machine)
+     - SGDClassifier
+   - Menggunakan Pipeline untuk mengotomatisasi preprocessing dan pelatihan model.
+   - Melakukan Hyperparameter Tuning dengan GridSearchCV untuk mendapatkan performa optimal.
+6. Evaluasi Model
+   - Menggunakan Confusion Matrix, Accuracy, Precision, Recall, dan F1-Score untuk menilai kinerja model.
+   - Melakukan Cross-Validation untuk menghindari overfitting dan meningkatkan generalisasi model.
+   - Menyimpan model terbaik ke dalam file models/best_model.pkl.
+7.Menyimpan model
+   - Menyimpan model yang telah dilatih dalam format .pkl menggunakan Joblib.
+   - Menyimpan preprocessor (scaler.pkl) dan encoder (encoder.pkl) untuk memastikan kompatibilitas dengan input baru.
+   - Menyiapkan direktori models/ untuk menyimpan semua model yang telah dilatih.
+8. Pembuatan Dashboard Interaktif
+   - Menggunakan Looker Studio untuk menampilkan visualisasi performa model dan insight dari data.
+   - Menghubungkan hasil prediksi dengan laporan yang dapat diakses oleh tim HR atau akademik.
+     
+Cakupan proyek ini dirancang untuk memberikan pemahaman mendalam tentang faktor-faktor yang berkontribusi terhadap dropout mahasiswa, serta menyediakan solusi berbasis data untuk meningkatkan tingkat kelulusan.
 
 ### Persiapan
 
@@ -68,15 +79,44 @@ Business dashboard yang telah dibuat berfungsi sebagai alat pemantauan kinerja a
 
 
 ## Menjalankan Sistem Machine Learning
-
+1. Persiapkan Lingkungan
+Pastikan semua dependensi yang dibutuhkan sudah terinstal.
 ```
 streamlit run prediction.py
 ```
+2. Pastikan File yang Dibutuhkan Tersedia
+   Letakkan file berikut di direktori proyek:
+   - best_model.pkl (model machine learning yang sudah dilatih)
+   - scaler.pkl (untuk normalisasi fitur numerik)
+   - encoder.pkl (untuk encoding fitur kategorikal)
+   - data_clean.csv (dataset bersih untuk referensi dan visualisasi)
+3. Jalankan Aplikasi Streamlit
+   Buka terminal atau command prompt, lalu jalankan perintah berikut di direktori tempat file kode disimpan:
+ ```
+streamlit run nama_file.py
+```
+Interaksi dengan Aplikasi
+
+4. Aplikasi akan menampilkan Dashboard Prediksi Dropout Mahasiswa di browser.
+   - Gunakan sidebar untuk memasukkan fitur input seperti kategori dan nilai numerik.
+   - Klik tombol Predict untuk melihat hasil prediksi apakah mahasiswa akan Dropout atau Continue, beserta tingkat kepercayaannya.
+   - Dashboard juga akan menampilkan distribusi status mahasiswa dalam bentuk visualisasi menggunakan Plotly.
+
+Dengan sistem ini, pihak akademik dapat dengan mudah melakukan analisis prediktif dan mengambil tindakan lebih awal terhadap mahasiswa yang berisiko mengalami dropout.
+Prototype dapat dilihat di link berikut : https://tugasdata2-bycmbvfxxapp5yjeosgtecw.streamlit.app/
 
 ## Conclusion
-Jelaskan konklusi dari proyek yang dikerjakan.
+Proyek ini bertujuan untuk membantu Jaya Jaya Institut dalam mendeteksi mahasiswa yang berisiko mengalami dropout menggunakan teknik machine learning. Dari analisis yang dilakukan, faktor utama yang mempengaruhi dropout mencakup biaya kuliah, jumlah mata kuliah yang diambil, kehadiran di semester awal, serta riwayat pendidikan sebelumnya. Model machine learning yang dikembangkan mampu memberikan prediksi dengan akurasi yang baik dan telah diintegrasikan ke dalam dashboard interaktif berbasis Streamlit, memungkinkan pihak akademik untuk menganalisis data serta memprediksi status mahasiswa secara real-time. Dengan sistem ini, institusi dapat melakukan intervensi lebih awal melalui bimbingan khusus, sehingga membantu mengurangi angka dropout dan meningkatkan tingkat kelulusan. Ke depannya, model ini dapat terus dikembangkan dengan dataset yang lebih besar serta penambahan fitur-fitur baru agar prediksi semakin akurat dan bermanfaat.
 
 ### Rekomendasi Action Items
-Berikan beberapa rekomendasi action items yang harus dilakukan perusahaan guna menyelesaikan permasalahan atau mencapai target mereka.
-- action item 1
-- action item 2
+1. Menyediakan Program Beasiswa atau Keringanan Biaya
+   Mengingat biaya kuliah menjadi salah satu faktor dropout, institusi dapat meningkatkan akses beasiswa atau menyediakan skema pembayaran fleksibel bagi mahasiswa yang mengalami kesulitan finansial.
+
+2. Meningkatkan Keterlibatan Akademik dan Non-Akademik
+   Mendorong mahasiswa untuk lebih aktif dalam kegiatan ekstrakurikuler, mentoring, atau program tutor sebaya guna meningkatkan keterikatan mereka dengan lingkungan kampus.
+
+3. Optimalisasi Kurikulum dan Metode Pengajaran
+   Melakukan evaluasi terhadap jumlah mata kuliah dan beban studi, serta menerapkan metode pembelajaran yang lebih fleksibel seperti hybrid learning untuk membantu mahasiswa yang mengalami kesulitan akademik.
+
+4. Meningkatkan Kehadiran di Semester Awal
+   Mengembangkan program orientasi dan monitoring khusus bagi mahasiswa baru agar mereka lebih siap dalam menghadapi perkuliahan dan mengurangi kemungkinan dropout di awal studi.
